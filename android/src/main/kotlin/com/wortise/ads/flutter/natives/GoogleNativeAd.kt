@@ -4,6 +4,8 @@ import android.content.Context
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.wortise.ads.AdError
+import com.wortise.ads.RevenueData
+import com.wortise.ads.extensions.toMap
 import com.wortise.ads.flutter.natives.GoogleNativeAdManager.Companion.CHANNEL_NATIVE
 import com.wortise.ads.natives.GoogleNativeAd
 import io.flutter.plugin.common.BinaryMessenger
@@ -57,5 +59,9 @@ class GoogleNativeAd(
         nativeAdView = adFactory.createNativeAd(nativeAd)
 
         channel.invokeMethod("loaded", null)
+    }
+
+    override fun onNativeRevenuePaid(ad: GoogleNativeAd, data: RevenueData) {
+        channel.invokeMethod("revenuePaid", data.toMap())
     }
 }

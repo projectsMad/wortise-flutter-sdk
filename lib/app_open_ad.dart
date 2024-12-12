@@ -11,6 +11,7 @@ enum AppOpenAdEvent {
   FAILED_TO_SHOW,
   IMPRESSION,
   LOADED,
+  REVENUE_PAID,
   SHOWN,
 }
 
@@ -119,6 +120,10 @@ class AppOpenAd {
 
     case "loaded":
       listener?.call(AppOpenAdEvent.LOADED, call.arguments);
+      break;
+
+    case "revenuePaid":
+      listener?.call(AppOpenAdEvent.REVENUE_PAID, call.arguments);
       break;
 
     case "shown":

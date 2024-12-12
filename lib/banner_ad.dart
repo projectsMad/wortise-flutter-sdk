@@ -11,6 +11,7 @@ enum BannerAdEvent {
   FAILED_TO_LOAD,
   IMPRESSION,
   LOADED,
+  REVENUE_PAID,
 }
 
 class BannerAd extends StatefulWidget {
@@ -132,6 +133,10 @@ class _BannerAdState extends State<BannerAd> with AutomaticKeepAliveClientMixin 
 
         widget.listener?.call(BannerAdEvent.LOADED, call.arguments);
         
+        break;
+
+      case "revenuePaid":
+        widget.listener?.call(BannerAdEvent.REVENUE_PAID, call.arguments);
         break;
       }
     });

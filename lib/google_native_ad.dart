@@ -9,7 +9,8 @@ enum GoogleNativeAdEvent {
   CLICKED,
   FAILED,
   IMPRESSION,
-  LOADED
+  LOADED,
+  REVENUE_PAID,
 }
 
 class GoogleNativeAd extends BaseAd {
@@ -68,6 +69,10 @@ class GoogleNativeAd extends BaseAd {
 
     case "loaded":
       listener?.call(GoogleNativeAdEvent.LOADED, call.arguments);
+      break;
+    
+    case "revenuePaid":
+      listener?.call(GoogleNativeAdEvent.REVENUE_PAID, call.arguments);
       break;
     }
 

@@ -12,6 +12,7 @@ enum RewardedAdEvent {
   FAILED_TO_SHOW,
   IMPRESSION,
   LOADED,
+  REVENUE_PAID,
   SHOWN,
 }
 
@@ -112,6 +113,10 @@ class RewardedAd {
 
     case "loaded":
       listener?.call(RewardedAdEvent.LOADED, call.arguments);
+      break;
+    
+    case "revenuePaid":
+      listener?.call(RewardedAdEvent.REVENUE_PAID, call.arguments);
       break;
 
     case "shown":

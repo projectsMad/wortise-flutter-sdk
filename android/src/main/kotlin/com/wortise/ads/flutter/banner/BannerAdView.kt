@@ -3,7 +3,9 @@ package com.wortise.ads.flutter.banner
 import android.content.Context
 import com.wortise.ads.AdError
 import com.wortise.ads.AdSize
+import com.wortise.ads.RevenueData
 import com.wortise.ads.banner.BannerAd
+import com.wortise.ads.extensions.toMap
 import com.wortise.ads.flutter.banner.BannerAd.Companion.CHANNEL_BANNER
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
@@ -60,6 +62,10 @@ class BannerAdView(private val context: Context, viewId: Int, args: Map<*, *>, m
         )
 
         channel.invokeMethod("loaded", values)
+    }
+
+    override fun onBannerRevenuePaid(ad: BannerAd, data: RevenueData) {
+        channel.invokeMethod("revenuePaid", data.toMap())
     }
 
 

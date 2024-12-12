@@ -11,6 +11,7 @@ enum InterstitialAdEvent {
   FAILED_TO_SHOW,
   IMPRESSION,
   LOADED,
+  REVENUE_PAID,
   SHOWN,
 }
 
@@ -107,6 +108,10 @@ class InterstitialAd {
 
     case "loaded":
       listener?.call(InterstitialAdEvent.LOADED, call.arguments);
+      break;
+    
+    case "revenuePaid":
+      listener?.call(InterstitialAdEvent.REVENUE_PAID, call.arguments);
       break;
 
     case "shown":
