@@ -1,0 +1,134 @@
+import Flutter
+import UIKit
+import WortiseSDK
+
+public class WortiseBannerAdViewFactory: NSObject, FlutterPlatformViewFactory {
+
+    public static let channelId = "\(WortiseFlutterPlugin.channelMain)/bannerAd"
+
+
+    private var messenger: FlutterBinaryMessenger
+
+
+    init(messenger: FlutterBinaryMessenger) {
+        self.messenger = messenger
+        super.init()
+    }
+
+    public func create(
+        withFrame      frame:  CGRect,
+        viewIdentifier viewId: Int64,
+        arguments      args:   Any?
+    ) -> FlutterPlatformView {
+
+        let values = args as! [String: Any]
+
+        return WortiseBannerAdView(
+            frame:           frame,
+            viewIdentifier:  viewId,
+            arguments:       values,
+            binaryMessenger: messenger
+        )
+    }
+
+    public func createArgsCodec() -> FlutterMessageCodec & NSObjectProtocol {
+        return FlutterStandardMessageCodec.sharedInstance()
+    }
+}
+
+public class WortiseBannerAdView: NSObject, FlutterPlatformView {
+
+    fileprivate var bannerAd: WABannerAd
+
+    fileprivate var channel: FlutterMethodChannel
+
+
+    init(
+        frame:                     CGRect,
+        viewIdentifier  viewId:    Int64,
+        arguments       args:      [String: Any],
+        binaryMessenger messenger: FlutterBinaryMessenger?
+    ) {
+        let channelId = "\(WortiseBannerAdViewFactory.channelId)_\(viewId)"
+
+        channel = FlutterMethodChannel(name: channelId, binaryMessenger: messenger!)
+
+        bannerAd = WABannerAd(frame: frame)
+
+        super.init()
+
+        let adUnitId = args["adUnitId"] as! String
+
+        bannerAd.delegate = self
+        bannerAd.adSize   = getAdSize(args)
+        bannerAd.adUnitId = adUnitId
+
+        if let time = getAutoRefreshTime(args) {
+            bannerAd.autoRefreshTime = time
+        }
+
+        bannerAd.loadAd()
+    }
+
+    public func view() -> UIView {
+        return bannerAd
+    }
+
+
+    fileprivate func getAdSize(_ args: [String: Any]) -> WAAdSize {
+
+        let params = args["adSize"] as! [String: Any]
+
+        let type = params["type"] as! String
+
+        let height = CGFloat(params["height"] as! Int)
+        let width  = CGFloat(params["width"]  as! Int)
+
+        switch type {
+        case "anchored":
+            return WAAdSize.getAnchoredAdaptiveBannerAdSize(width: width)
+
+        case "inline":
+            return WAAdSize.getInlineAdaptiveBannerAdSize(width: width, maxHeight: height)
+
+        default:
+            return WAAdSize(width: width, height: height)
+        }
+    }
+
+    fileprivate func getAutoRefreshTime(_ args: [String: Any]) -> Double? {
+        guard let time = args["autoRefreshTime"] as? Int else {
+            return nil
+        }
+
+        return Double(time) / 1000.0
+    }
+}
+
+extension WortiseBannerAdView: WABannerDelegate {
+
+    public func didClick(bannerAd: WABannerAd) {
+        channel.invokeMethod("clicked", arguments: nil)
+    }
+    
+    public func didFailToLoad(bannerAd: WABannerAd, error: WAAdError) {
+        let values = [
+            "error": error.name
+        ]
+
+        channel.invokeMethod("failedToLoad", arguments: values)
+    }
+    
+    public func didImpress(bannerAd: WABannerAd) {
+        channel.invokeMethod("impression", arguments: nil)
+    }
+
+    public func didLoad(bannerAd: WABannerAd) {
+        let values = [
+            "adHeight": bannerAd.adHeight,
+            "adWidth":  bannerAd.adWidth
+        ]
+
+        channel.invokeMethod("loaded", arguments: values)
+    }
+}

@@ -6,9 +6,9 @@ import 'wortise_sdk.dart';
 
 class ConsentManager {
 
-  static const CHANNEL_CONSENT = "${WortiseSdk.CHANNEL_MAIN}/consentManager";
+  static const CHANNEL_ID = "${WortiseSdk.CHANNEL_MAIN}/consentManager";
 
-  static const MethodChannel _channel = const MethodChannel(CHANNEL_CONSENT);
+  static const MethodChannel _channel = const MethodChannel(CHANNEL_ID);
 
 
   static Future<bool> get canCollectData async {

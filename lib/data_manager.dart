@@ -1,16 +1,15 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import 'user_gender.dart';
 import 'wortise_sdk.dart';
 
 class DataManager {
-  static const CHANNEL_DATA_MANAGER = "${WortiseSdk.CHANNEL_MAIN}/dataManager";
+  static const CHANNEL_ID = "${WortiseSdk.CHANNEL_MAIN}/dataManager";
 
   static const MethodChannel _channel =
-      const MethodChannel(CHANNEL_DATA_MANAGER);
+      const MethodChannel(CHANNEL_ID);
 
 
   static Future<int?> get age async {
@@ -30,7 +29,7 @@ class DataManager {
       return null;
     }
 
-    return UserGender.values.firstWhere((g) => describeEnum(g) == gender);
+    return UserGender.values.firstWhere((g) => g.name == gender);
   }
 
 
@@ -53,7 +52,7 @@ class DataManager {
   }
 
   static Future<void> setGender(UserGender? gender) async {
-    String? name = (gender != null) ? describeEnum(gender) : null;
+    String? name = (gender != null) ? gender.name : null;
 
     Map<String, dynamic> values = {'gender': name};
 

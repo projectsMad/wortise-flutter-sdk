@@ -8,7 +8,7 @@ import 'wortise_sdk.dart';
 
 class AdWidget extends StatefulWidget {
 
-  static const CHANNEL_AD_WIDGET = "${WortiseSdk.CHANNEL_MAIN}/adWidget";
+  static const CHANNEL_ID = "${WortiseSdk.CHANNEL_MAIN}/adWidget";
 
 
   final BaseAd ad;
@@ -32,19 +32,25 @@ class _AdWidgetState extends State<AdWidget> with AutomaticKeepAliveClientMixin 
   Widget build(BuildContext context) {
     super.build(context);
 
-    if (!Platform.isAndroid) {
-      return Container();
-    }
-
-    var params = <String, dynamic>{
+    Map<String, dynamic> params = {
       "adId": widget.ad.adId
     };
 
-    return AndroidView(
-      viewType: AdWidget.CHANNEL_AD_WIDGET,
-      creationParams: params,
-      creationParamsCodec: StandardMessageCodec(),
-    );
+    if (Platform.isAndroid) {
+      return AndroidView(
+        viewType: AdWidget.CHANNEL_ID,
+        creationParams: params,
+        creationParamsCodec: const StandardMessageCodec(),
+      );
+    } else if (Platform.isIOS) {
+      return UiKitView(
+        viewType: AdWidget.CHANNEL_ID,
+        creationParams: params,
+        creationParamsCodec: const StandardMessageCodec(),
+      );
+    } else {
+      return Container();
+    }
   }
 
   @override

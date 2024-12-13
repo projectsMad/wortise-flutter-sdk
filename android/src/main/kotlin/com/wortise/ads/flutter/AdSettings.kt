@@ -20,7 +20,7 @@ class AdSettings : FlutterPlugin, MethodCallHandler {
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         context = binding.applicationContext
 
-        channel = MethodChannel(binding.binaryMessenger, CHANNEL_AD_SETTINGS)
+        channel = MethodChannel(binding.binaryMessenger, CHANNEL_ID)
         channel.setMethodCallHandler(this)
     }
 
@@ -102,6 +102,6 @@ class AdSettings : FlutterPlugin, MethodCallHandler {
 
 
     companion object {
-        const val CHANNEL_AD_SETTINGS = "${CHANNEL_MAIN}/adSettings"
+        const val CHANNEL_ID = "${CHANNEL_MAIN}/adSettings"
     }
 }

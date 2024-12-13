@@ -14,9 +14,9 @@ enum GoogleNativeAdEvent {
 
 class GoogleNativeAd extends BaseAd {
 
-  static const CHANNEL_NATIVE = "${WortiseSdk.CHANNEL_MAIN}/nativeAd";
+  static const CHANNEL_ID = "${WortiseSdk.CHANNEL_MAIN}/nativeAd";
 
-  static const MethodChannel _channel = const MethodChannel(CHANNEL_NATIVE);
+  static const MethodChannel _channel = const MethodChannel(CHANNEL_ID);
 
 
   MethodChannel? _adChannel;
@@ -28,7 +28,7 @@ class GoogleNativeAd extends BaseAd {
 
   GoogleNativeAd(String adUnitId, this.factoryId, this.listener) : super(adUnitId: adUnitId) {    
     if (listener != null) {
-      _adChannel = MethodChannel('${CHANNEL_NATIVE}_$adId');
+      _adChannel = MethodChannel('${CHANNEL_ID}_$adId');
       _adChannel?.setMethodCallHandler(_handleEvent);
     }
   }

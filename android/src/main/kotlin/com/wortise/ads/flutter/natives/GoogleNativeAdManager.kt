@@ -27,7 +27,7 @@ class GoogleNativeAdManager : AdWithView, FlutterPlugin, MethodCallHandler {
 
         context = binding.applicationContext
 
-        channel = MethodChannel(binding.binaryMessenger, CHANNEL_NATIVE)
+        channel = MethodChannel(binding.binaryMessenger, CHANNEL_ID)
         channel.setMethodCallHandler(this)
     }
 
@@ -96,13 +96,13 @@ class GoogleNativeAdManager : AdWithView, FlutterPlugin, MethodCallHandler {
     override fun getPlatformView(adId: String): PlatformView? {
         val nativeAdView = instances[adId]?.nativeAdView ?: return null
 
-        return FlutterPlatformView(nativeAdView);
+        return FlutterPlatformView(nativeAdView)
     }
 
 
     companion object {
 
-        const val CHANNEL_NATIVE = "${CHANNEL_MAIN}/nativeAd"
+        const val CHANNEL_ID = "${CHANNEL_MAIN}/nativeAd"
 
 
         private val adFactories = mutableMapOf<String, GoogleNativeAdFactory>()

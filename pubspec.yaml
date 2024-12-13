@@ -21,3 +21,5 @@ flutter:
       android:
         package: com.wortise.ads.flutter
         pluginClass: WortiseFlutterPlugin
+      ios:
+        pluginClass: WortiseFlutterPlugin

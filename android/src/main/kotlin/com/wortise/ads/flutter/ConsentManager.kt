@@ -28,7 +28,7 @@ class ConsentManager : ActivityAware, FlutterPlugin, MethodCallHandler {
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         context = binding.applicationContext
 
-        channel = MethodChannel(binding.binaryMessenger, CHANNEL_CONSENT)
+        channel = MethodChannel(binding.binaryMessenger, CHANNEL_ID)
         channel.setMethodCallHandler(this)
     }
 
@@ -84,6 +84,6 @@ class ConsentManager : ActivityAware, FlutterPlugin, MethodCallHandler {
 
 
     companion object {
-        const val CHANNEL_CONSENT = "${CHANNEL_MAIN}/consentManager"
+        const val CHANNEL_ID = "${CHANNEL_MAIN}/consentManager"
     }
 }

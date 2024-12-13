@@ -20,7 +20,7 @@ class DataManager : FlutterPlugin, MethodCallHandler {
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         context = binding.applicationContext
 
-        channel = MethodChannel(binding.binaryMessenger, CHANNEL_DATA_MANAGER)
+        channel = MethodChannel(binding.binaryMessenger, CHANNEL_ID)
         channel.setMethodCallHandler(this)
     }
 
@@ -98,6 +98,6 @@ class DataManager : FlutterPlugin, MethodCallHandler {
 
 
     companion object {
-        const val CHANNEL_DATA_MANAGER = "${CHANNEL_MAIN}/dataManager"
+        const val CHANNEL_ID = "${CHANNEL_MAIN}/dataManager"
     }
 }

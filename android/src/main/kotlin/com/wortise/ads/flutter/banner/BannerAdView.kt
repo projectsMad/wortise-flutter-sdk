@@ -4,7 +4,7 @@ import android.content.Context
 import com.wortise.ads.AdError
 import com.wortise.ads.AdSize
 import com.wortise.ads.banner.BannerAd
-import com.wortise.ads.flutter.banner.BannerAd.Companion.CHANNEL_BANNER
+import com.wortise.ads.flutter.banner.BannerAdViewFactory.Companion.CHANNEL_ID
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView
@@ -17,7 +17,7 @@ class BannerAdView(private val context: Context, viewId: Int, args: Map<*, *>, m
 
     private val bannerAd: BannerAd
 
-    private val channel = MethodChannel(messenger, "${CHANNEL_BANNER}_$viewId")
+    private val channel = MethodChannel(messenger, "${CHANNEL_ID}_$viewId")
 
 
     init {
@@ -55,8 +55,8 @@ class BannerAdView(private val context: Context, viewId: Int, args: Map<*, *>, m
 
     override fun onBannerLoaded(ad: BannerAd) {
         val values = mapOf(
-            "adHeight" to ad.adHeight,
-            "adWidth"  to ad.adWidth
+            "adHeight" to ad.adHeight.toDouble(),
+            "adWidth"  to ad.adWidth .toDouble()
         )
 
         channel.invokeMethod("loaded", values)

@@ -35,7 +35,7 @@ class AppOpenAd : ActivityAware, FlutterPlugin, MethodCallHandler {
 
         context = binding.applicationContext
 
-        channel = MethodChannel(binding.binaryMessenger, CHANNEL_APP_OPEN)
+        channel = MethodChannel(binding.binaryMessenger, CHANNEL_ID)
         channel.setMethodCallHandler(this)
     }
 
@@ -80,7 +80,7 @@ class AppOpenAd : ActivityAware, FlutterPlugin, MethodCallHandler {
     private fun createInstance(adUnitId: String): AppOpenAd {
         val activity = requireNotNull(activity)
 
-        val adChannel = MethodChannel(binding.binaryMessenger, "${CHANNEL_APP_OPEN}_$adUnitId")
+        val adChannel = MethodChannel(binding.binaryMessenger, "${CHANNEL_ID}_$adUnitId")
 
         return AppOpenAd(activity, adUnitId).also {
 
@@ -220,6 +220,6 @@ class AppOpenAd : ActivityAware, FlutterPlugin, MethodCallHandler {
 
 
     companion object {
-        const val CHANNEL_APP_OPEN = "${CHANNEL_MAIN}/appOpenAd"
+        const val CHANNEL_ID = "${CHANNEL_MAIN}/appOpenAd"
     }
 }
