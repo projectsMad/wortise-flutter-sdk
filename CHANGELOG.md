@@ -1,3 +1,7 @@
+## 1.6.1+2
+
+* Added support for Wortise iOS SDK
+
 ## 1.6.1+1
 
 * Added support for newer versions of Gradle and Kotlin
