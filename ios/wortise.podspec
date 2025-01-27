@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.license =
   {
-    :text => 'Copyright 2024 Wortise. All Rights Reserved.',
+    :text => 'Copyright Wortise. All Rights Reserved.',
     :type => 'Copyright'
   }
 
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '12.0'
 
   s.dependency 'Flutter'
-  s.dependency 'WortiseSDK', '1.6.1-beta1'
+  s.dependency 'WortiseSDK', '1.6.1'
 
   # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
