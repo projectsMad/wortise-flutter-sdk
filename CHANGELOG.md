@@ -1,3 +1,7 @@
+## 1.6.1+1
+
+* Added support for newer versions of Gradle and Kotlin
+
 ## 1.6.1
 
 * Wortise SDK updated to version 1.6.1
