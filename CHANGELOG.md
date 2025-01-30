@@ -1,3 +1,7 @@
+## 1.6.1+3
+
+* Fixed issue with iOS banners
+
 ## 1.6.1+2
 
 * Added support for Wortise iOS SDK
