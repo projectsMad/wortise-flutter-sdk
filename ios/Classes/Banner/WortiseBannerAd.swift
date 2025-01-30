@@ -59,9 +59,10 @@ public class WortiseBannerAdView: NSObject, FlutterPlatformView {
 
         let adUnitId = args["adUnitId"] as! String
 
-        bannerAd.delegate = self
-        bannerAd.adSize   = getAdSize(args)
-        bannerAd.adUnitId = adUnitId
+        bannerAd.adSize             = getAdSize(args)
+        bannerAd.adUnitId           = adUnitId
+        bannerAd.delegate           = self
+        bannerAd.rootViewController = WortiseFlutterPlugin.viewController
 
         if let time = getAutoRefreshTime(args) {
             bannerAd.autoRefreshTime = time
