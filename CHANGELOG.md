@@ -1,3 +1,7 @@
+## 1.6.2
+
+* Wortise Android SDK updated to version 1.6.2
+
 ## 1.6.1+3
 
 * Fixed issue with iOS banners
