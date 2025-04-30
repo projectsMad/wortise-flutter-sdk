@@ -5,8 +5,8 @@ import com.wortise.ads.AdError
 import com.wortise.ads.AdSize
 import com.wortise.ads.RevenueData
 import com.wortise.ads.banner.BannerAd
-import com.wortise.ads.extensions.toMap
 import com.wortise.ads.flutter.banner.BannerAd.Companion.CHANNEL_BANNER
+import com.wortise.ads.flutter.extensions.toMap
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView

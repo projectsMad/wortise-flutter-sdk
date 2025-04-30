@@ -5,8 +5,8 @@ import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.wortise.ads.AdError
 import com.wortise.ads.RevenueData
-import com.wortise.ads.extensions.toMap
 import com.wortise.ads.flutter.natives.GoogleNativeAdManager.Companion.CHANNEL_NATIVE
+import com.wortise.ads.flutter.extensions.toMap
 import com.wortise.ads.natives.GoogleNativeAd
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel

@@ -5,8 +5,8 @@ import android.content.Context
 import com.wortise.ads.AdError
 import com.wortise.ads.RevenueData
 import com.wortise.ads.appopen.AppOpenAd
-import com.wortise.ads.extensions.toMap
 import com.wortise.ads.flutter.WortiseFlutterPlugin.Companion.CHANNEL_MAIN
+import com.wortise.ads.flutter.extensions.toMap
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -215,7 +215,7 @@ class AppOpenAd : ActivityAware, FlutterPlugin, MethodCallHandler {
             channel.invokeMethod("loaded", null)
         }
 
-        override fun onRewardedRevenuePaid(ad: AppOpenAd, data: RevenueData) {
+        override fun onAppOpenRevenuePaid(ad: AppOpenAd, data: RevenueData) {
             channel.invokeMethod("revenuePaid", data.toMap())
         }
 

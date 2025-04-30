@@ -4,8 +4,8 @@ import android.app.Activity
 import android.content.Context
 import com.wortise.ads.AdError
 import com.wortise.ads.RevenueData
-import com.wortise.ads.extensions.toMap
 import com.wortise.ads.flutter.WortiseFlutterPlugin.Companion.CHANNEL_MAIN
+import com.wortise.ads.flutter.extensions.toMap
 import com.wortise.ads.rewarded.RewardedAd
 import com.wortise.ads.rewarded.models.Reward
 import io.flutter.embedding.engine.plugins.FlutterPlugin
