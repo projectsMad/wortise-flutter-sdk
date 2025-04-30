@@ -7,7 +7,7 @@ import io.flutter.plugin.common.StandardMessageCodec
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 
-class AdWidget(private val plugin: WortiseFlutterPlugin) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
+class AdWidgetFactory(private val plugin: WortiseFlutterPlugin) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
 
     override fun create(context: Context?, viewId: Int, args: Any?): PlatformView {
         requireNotNull(context)
@@ -23,6 +23,6 @@ class AdWidget(private val plugin: WortiseFlutterPlugin) : PlatformViewFactory(S
 
 
     companion object {
-        const val CHANNEL_AD_WIDGET = "${CHANNEL_MAIN}/adWidget"
+        const val CHANNEL_ID = "${CHANNEL_MAIN}/adWidget"
     }
 }

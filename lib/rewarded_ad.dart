@@ -18,9 +18,9 @@ enum RewardedAdEvent {
 
 class RewardedAd {
 
-  static const CHANNEL_REWARDED = "${WortiseSdk.CHANNEL_MAIN}/rewardedAd";
+  static const CHANNEL_ID = "${WortiseSdk.CHANNEL_MAIN}/rewardedAd";
 
-  static const MethodChannel _channel = const MethodChannel(CHANNEL_REWARDED);
+  static const MethodChannel _channel = const MethodChannel(CHANNEL_ID);
 
 
   MethodChannel? _adChannel;
@@ -34,7 +34,7 @@ class RewardedAd {
 
   RewardedAd(this.adUnitId, this.listener, {this.reloadOnDismissed = false}) {
     if (listener != null) {
-      _adChannel = MethodChannel('${CHANNEL_REWARDED}_$adUnitId');
+      _adChannel = MethodChannel('${CHANNEL_ID}_$adUnitId');
       _adChannel?.setMethodCallHandler(_handleEvent);
     }
   }

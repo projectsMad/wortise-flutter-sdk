@@ -17,9 +17,9 @@ enum AppOpenAdEvent {
 
 class AppOpenAd {
 
-  static const CHANNEL_APP_OPEN = "${WortiseSdk.CHANNEL_MAIN}/appOpenAd";
+  static const CHANNEL_ID = "${WortiseSdk.CHANNEL_MAIN}/appOpenAd";
 
-  static const MethodChannel _channel = const MethodChannel(CHANNEL_APP_OPEN);
+  static const MethodChannel _channel = const MethodChannel(CHANNEL_ID);
 
 
   MethodChannel? _adChannel;
@@ -33,7 +33,7 @@ class AppOpenAd {
 
   AppOpenAd(this.adUnitId, {this.listener, this.autoReload = false}) {
     if (listener != null) {
-      _adChannel = MethodChannel('${CHANNEL_APP_OPEN}_$adUnitId');
+      _adChannel = MethodChannel('${CHANNEL_ID}_$adUnitId');
       _adChannel?.setMethodCallHandler(_handleEvent);
     }
   }

@@ -1,16 +1,16 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import 'ad_content_rating.dart';
 import 'wortise_sdk.dart';
 
 class AdSettings {
-  static const CHANNEL_AD_SETTINGS = "${WortiseSdk.CHANNEL_MAIN}/adSettings";
+
+  static const CHANNEL_ID = "${WortiseSdk.CHANNEL_MAIN}/adSettings";
 
   static const MethodChannel _channel =
-      const MethodChannel(CHANNEL_AD_SETTINGS);
+      const MethodChannel(CHANNEL_ID);
 
   static Future<String?> get assetKey async {
     return await _channel.invokeMethod('getAssetKey');
@@ -31,7 +31,7 @@ class AdSettings {
       return null;
     }
 
-    return AdContentRating.values.firstWhere((r) => describeEnum(r) == rating);
+    return AdContentRating.values.firstWhere((r) => r.name == rating);
   }
 
   static Future<String?> get userId async {
@@ -45,7 +45,7 @@ class AdSettings {
   }
 
   static Future<void> setMaxAdContentRating(AdContentRating? rating) async {
-    String? name = (rating != null) ? describeEnum(rating) : null;
+    String? name = (rating != null) ? rating.name : null;
 
     Map<String, dynamic> values = {'rating': name};
 

@@ -5,7 +5,7 @@ import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.wortise.ads.AdError
 import com.wortise.ads.RevenueData
-import com.wortise.ads.flutter.natives.GoogleNativeAdManager.Companion.CHANNEL_NATIVE
+import com.wortise.ads.flutter.natives.GoogleNativeAdManager.Companion.CHANNEL_ID
 import com.wortise.ads.flutter.extensions.toMap
 import com.wortise.ads.natives.GoogleNativeAd
 import io.flutter.plugin.common.BinaryMessenger
@@ -16,10 +16,10 @@ class GoogleNativeAd(
     private val adId:      String,
     private val adUnitId:  String, 
     private val adFactory: GoogleNativeAdFactory,
+    messenger: BinaryMessenger
+) : GoogleNativeAd.Listener {
 
-    messenger: BinaryMessenger) : GoogleNativeAd.Listener {
-
-    private val channel = MethodChannel(messenger, "${CHANNEL_NATIVE}_$adId")
+    private val channel = MethodChannel(messenger, "${CHANNEL_ID}_$adId")
 
     private val nativeAd by lazy {
         GoogleNativeAd(context, adUnitId, this)

@@ -37,7 +37,7 @@ class InterstitialAd : ActivityAware, FlutterPlugin, MethodCallHandler {
 
         context = binding.applicationContext
 
-        channel = MethodChannel(binding.binaryMessenger, CHANNEL_INTERSTITIAL)
+        channel = MethodChannel(binding.binaryMessenger, CHANNEL_ID)
         channel.setMethodCallHandler(this)
     }
 
@@ -78,7 +78,7 @@ class InterstitialAd : ActivityAware, FlutterPlugin, MethodCallHandler {
     private fun createInstance(adUnitId: String): InterstitialAd {
         val activity = requireNotNull(activity)
 
-        val adChannel = MethodChannel(binding.binaryMessenger, "${CHANNEL_INTERSTITIAL}_$adUnitId")
+        val adChannel = MethodChannel(binding.binaryMessenger, "${CHANNEL_ID}_$adUnitId")
 
         return InterstitialAd(activity, adUnitId).also {
 
@@ -185,6 +185,6 @@ class InterstitialAd : ActivityAware, FlutterPlugin, MethodCallHandler {
 
 
     companion object {
-        const val CHANNEL_INTERSTITIAL = "${CHANNEL_MAIN}/interstitialAd"
+        const val CHANNEL_ID = "${CHANNEL_MAIN}/interstitialAd"
     }
 }

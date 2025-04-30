@@ -17,9 +17,9 @@ enum InterstitialAdEvent {
 
 class InterstitialAd {
 
-  static const CHANNEL_INTERSTITIAL = "${WortiseSdk.CHANNEL_MAIN}/interstitialAd";
+  static const CHANNEL_ID = "${WortiseSdk.CHANNEL_MAIN}/interstitialAd";
 
-  static const MethodChannel _channel = const MethodChannel(CHANNEL_INTERSTITIAL);
+  static const MethodChannel _channel = const MethodChannel(CHANNEL_ID);
 
 
   MethodChannel? _adChannel;
@@ -33,7 +33,7 @@ class InterstitialAd {
 
   InterstitialAd(this.adUnitId, this.listener, {this.reloadOnDismissed = false}) {
     if (listener != null) {
-      _adChannel = MethodChannel('${CHANNEL_INTERSTITIAL}_$adUnitId');
+      _adChannel = MethodChannel('${CHANNEL_ID}_$adUnitId');
       _adChannel?.setMethodCallHandler(_handleEvent);
     }
   }

@@ -16,7 +16,7 @@ enum BannerAdEvent {
 
 class BannerAd extends StatefulWidget {
 
-  static const CHANNEL_BANNER = "${WortiseSdk.CHANNEL_MAIN}/bannerAd";
+  static const CHANNEL_ID = "${WortiseSdk.CHANNEL_MAIN}/bannerAd";
 
   static const AUTO_REFRESH_DEFAULT_TIME = 60 * 1000;
   static const AUTO_REFRESH_DISABLED     = -1;
@@ -65,22 +65,31 @@ class _BannerAdState extends State<BannerAd> with AutomaticKeepAliveClientMixin 
   Widget build(BuildContext context) {
     super.build(context);
 
-    if (!Platform.isAndroid) {
-      return Container();
-    }
-
-    var params = <String, dynamic>{
+    Map<String, dynamic> params = {
       "adSize": widget.adSize.toMap,
       "adUnitId": widget.adUnitId,
       "autoRefreshTime": widget.autoRefreshTime
     };
 
-    Widget platformView = AndroidView(
-      viewType: BannerAd.CHANNEL_BANNER,
-      creationParams: params,
-      creationParamsCodec: StandardMessageCodec(),
-      onPlatformViewCreated: _onViewCreated,
-    );
+    Widget platformView;
+    
+    if (Platform.isAndroid) {
+      platformView = AndroidView(
+        viewType: BannerAd.CHANNEL_ID,
+        creationParams: params,
+        creationParamsCodec: const StandardMessageCodec(),
+        onPlatformViewCreated: _onViewCreated,
+      );
+    } else if (Platform.isIOS) {
+      platformView = UiKitView(
+        viewType: BannerAd.CHANNEL_ID,
+        creationParams: params,
+        creationParamsCodec: const StandardMessageCodec(),
+        onPlatformViewCreated: _onViewCreated,
+      );
+    } else {
+      return Container();
+    }
 
     return Container(
       child: platformView,
@@ -93,11 +102,11 @@ class _BannerAdState extends State<BannerAd> with AutomaticKeepAliveClientMixin 
   bool get wantKeepAlive => widget.keepAlive;
 
 
-  void _updateState({ int? adHeight }) {
-    var height = adHeight;
+  void _updateState({ double? adHeight }) {
+    double? height = adHeight;
 
     if (height == null || height <= 0) {
-      height = widget.adSize.height;
+      height = widget.adSize.height.toDouble();
     }
 
     if (height <= 0) {
@@ -105,12 +114,12 @@ class _BannerAdState extends State<BannerAd> with AutomaticKeepAliveClientMixin 
     }
 
     setState(() {
-      containerHeight = height?.toDouble() ?? double.infinity;
+      containerHeight = height ?? double.infinity;
     });
   }
 
   void _onViewCreated(int id) {
-    final channel = MethodChannel('${BannerAd.CHANNEL_BANNER}_$id');
+    final channel = MethodChannel('${BannerAd.CHANNEL_ID}_$id');
 
     channel.setMethodCallHandler((MethodCall call) async {
       switch (call.method) {
@@ -127,7 +136,7 @@ class _BannerAdState extends State<BannerAd> with AutomaticKeepAliveClientMixin 
         break;
 
       case "loaded":
-        var adHeight = call.arguments["adHeight"];
+        double? adHeight = call.arguments["adHeight"] as double?;
 
         _updateState(adHeight: adHeight);
 

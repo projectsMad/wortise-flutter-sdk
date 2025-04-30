@@ -1,3 +1,19 @@
+## 1.6.2
+
+* Wortise Android SDK updated to version 1.6.2
+
+## 1.6.1+3
+
+* Fixed issue with iOS banners
+
+## 1.6.1+2
+
+* Added support for Wortise iOS SDK
+
+## 1.6.1+1
+
+* Added support for newer versions of Gradle and Kotlin
+
 ## 1.6.1
 
 * Wortise SDK updated to version 1.6.1

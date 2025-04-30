@@ -2,10 +2,9 @@ package com.wortise.ads.flutter
 
 import android.content.Context
 import com.wortise.ads.WortiseSdk
-import com.wortise.ads.flutter.AdWidget.Companion.CHANNEL_AD_WIDGET
+import com.wortise.ads.flutter.AdWidgetFactory
 import com.wortise.ads.flutter.appopen.AppOpenAd
-import com.wortise.ads.flutter.banner.BannerAd
-import com.wortise.ads.flutter.banner.BannerAd.Companion.CHANNEL_BANNER
+import com.wortise.ads.flutter.banner.BannerAdViewFactory
 import com.wortise.ads.flutter.interstitial.InterstitialAd
 import com.wortise.ads.flutter.natives.GoogleNativeAdManager
 import com.wortise.ads.flutter.rewarded.RewardedAd
@@ -50,9 +49,15 @@ class WortiseFlutterPlugin : ActivityAware, FlutterPlugin, MethodCallHandler {
 
         plugins.forEach { it.onAttachedToEngine(binding) }
 
-        binding.platformViewRegistry.registerViewFactory(CHANNEL_AD_WIDGET, AdWidget(this))
+        binding.platformViewRegistry.registerViewFactory(
+            AdWidgetFactory.CHANNEL_ID,
+            AdWidgetFactory(this)
+        )
 
-        binding.platformViewRegistry.registerViewFactory(CHANNEL_BANNER, BannerAd(binding.binaryMessenger))
+        binding.platformViewRegistry.registerViewFactory(
+            BannerAdViewFactory.CHANNEL_ID,
+            BannerAdViewFactory(binding.binaryMessenger)
+        )
     }
 
     override fun onDetachedFromActivity() {

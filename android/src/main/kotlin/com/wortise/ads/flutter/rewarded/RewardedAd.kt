@@ -38,7 +38,7 @@ class RewardedAd : ActivityAware, FlutterPlugin, MethodCallHandler {
 
         context = binding.applicationContext
 
-        channel = MethodChannel(binding.binaryMessenger, CHANNEL_REWARDED)
+        channel = MethodChannel(binding.binaryMessenger, CHANNEL_ID)
         channel.setMethodCallHandler(this)
     }
 
@@ -79,7 +79,7 @@ class RewardedAd : ActivityAware, FlutterPlugin, MethodCallHandler {
     private fun createInstance(adUnitId: String): RewardedAd {
         val activity = requireNotNull(activity)
 
-        val adChannel = MethodChannel(binding.binaryMessenger, "${CHANNEL_REWARDED}_$adUnitId")
+        val adChannel = MethodChannel(binding.binaryMessenger, "${CHANNEL_ID}_$adUnitId")
 
         return RewardedAd(activity, adUnitId).also {
 
@@ -196,6 +196,6 @@ class RewardedAd : ActivityAware, FlutterPlugin, MethodCallHandler {
 
 
     companion object {
-        const val CHANNEL_REWARDED = "${CHANNEL_MAIN}/rewardedAd"
+        const val CHANNEL_ID = "${CHANNEL_MAIN}/rewardedAd"
     }
 }
