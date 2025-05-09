@@ -1,5 +1,5 @@
 group 'com.wortise.ads.flutter'
-version '1.6.2'
+version '1.6.3'
 
 buildscript {
     ext.kotlin_version = '1.8.0'
@@ -61,6 +61,6 @@ android {
 }
 
 dependencies {
-    api 'com.wortise:android-sdk:1.6.2'
+    api 'com.wortise:android-sdk:1.6.3'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
