@@ -162,19 +162,11 @@ fileprivate class WortiseRewardedDelegate: WARewardedDelegate {
     }
     
     func didFailToLoad(rewardedAd: WARewardedAd, error: WAAdError) {
-        let values = [
-            "error": error.name
-        ]
-
-        channel.invokeMethod("failedToLoad", arguments: values)
+        channel.invokeMethod("failedToLoad", arguments: error.toMap())
     }
     
     func didFailToShow(rewardedAd: WARewardedAd, error: WAAdError) {
-        let values = [
-            "error": error.name
-        ]
-
-        channel.invokeMethod("failedToShow", arguments: values)
+        channel.invokeMethod("failedToShow", arguments: error.toMap())
     }
 
     func didImpress(rewardedAd: WARewardedAd) {
@@ -183,6 +175,10 @@ fileprivate class WortiseRewardedDelegate: WARewardedDelegate {
 
     func didLoad(rewardedAd: WARewardedAd) {
         channel.invokeMethod("loaded", arguments: nil)
+    }
+
+    func didPayRevenue(rewardedAd: WARewardedAd, data: WARevenueData) {
+        channel.invokeMethod("revenuePaid", arguments: data.toMap())
     }
 
     func didShow(rewardedAd: WARewardedAd) {

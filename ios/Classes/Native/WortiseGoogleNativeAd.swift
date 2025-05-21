@@ -19,7 +19,7 @@ public class WortiseGoogleNativeAd: NSObject {
         )
     }()
 
-    fileprivate(set) var nativeAdView: GADNativeAdView? = nil
+    fileprivate(set) var nativeAdView: NativeAdView? = nil
 
 
     init(
@@ -56,24 +56,24 @@ extension WortiseGoogleNativeAd: WAGoogleNativeDelegate {
     }
 
     public func didFailToLoad(nativeAd: WAGoogleNativeAd, error: WAAdError) {
-        let values = [
-            "error": error.name
-        ]
-
-        channel.invokeMethod("failedToLoad", arguments: values)
+        channel.invokeMethod("failedToLoad", arguments: error.toMap())
     }
     
-    public func didLoad(nativeAd: WAGoogleNativeAd, googleNativeAd: GADNativeAd) {
+    public func didLoad(nativeAd: WAGoogleNativeAd, googleNativeAd: NativeAd) {
         nativeAdView = adFactory.create(nativeAd: googleNativeAd)
 
         channel.invokeMethod("loaded", arguments: nil)
     }
-    
+
+    public func didPayRevenue(nativeAd: WAGoogleNativeAd, data: WARevenueData) {
+        channel.invokeMethod("revenuePaid", arguments: data.toMap())
+    }
+
     public func didRecord(impression: WAGoogleNativeAd) {
         channel.invokeMethod("impression", arguments: nil)
     }
 }
 
 public protocol WortiseGoogleNativeAdFactory {
-    func create(nativeAd: GADNativeAd) -> GADNativeAdView
+    func create(nativeAd: NativeAd) -> NativeAdView
 }

@@ -1,5 +1,5 @@
 group 'com.wortise.ads.flutter'
-version '1.6.3'
+version '1.7.0'
 
 buildscript {
     ext.kotlin_version = '1.8.0'
@@ -32,14 +32,14 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 34
+    compileSdkVersion 35
 
     if (project.android.hasProperty('namespace')) {
         namespace 'com.wortise.ads.flutter'
     }
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 23
     }
 
     lintOptions {
@@ -61,6 +61,6 @@ android {
 }
 
 dependencies {
-    api 'com.wortise:android-sdk:1.6.3'
+    api 'com.wortise:android-sdk:1.7.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }

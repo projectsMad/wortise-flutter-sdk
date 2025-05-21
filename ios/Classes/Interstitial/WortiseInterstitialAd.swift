@@ -152,19 +152,11 @@ fileprivate class WortiseInterstitialDelegate: WAInterstitialDelegate {
     }
     
     func didFailToLoad(interstitialAd: WAInterstitialAd, error: WAAdError) {
-        let values = [
-            "error": error.name
-        ]
-
-        channel.invokeMethod("failedToLoad", arguments: values)
+        channel.invokeMethod("failedToLoad", arguments: error.toMap())
     }
     
     func didFailToShow(interstitialAd: WAInterstitialAd, error: WAAdError) {
-        let values = [
-            "error": error.name
-        ]
-
-        channel.invokeMethod("failedToShow", arguments: values)
+        channel.invokeMethod("failedToShow", arguments: error.toMap())
     }
 
     func didImpress(interstitialAd: WAInterstitialAd) {
@@ -173,6 +165,10 @@ fileprivate class WortiseInterstitialDelegate: WAInterstitialDelegate {
 
     func didLoad(interstitialAd: WAInterstitialAd) {
         channel.invokeMethod("loaded", arguments: nil)
+    }
+
+    func didPayRevenue(interstitialAd: WAInterstitialAd, data: WARevenueData) {
+        channel.invokeMethod("revenuePaid", arguments: data.toMap())
     }
 
     func didShow(interstitialAd: WAInterstitialAd) {

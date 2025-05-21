@@ -190,19 +190,11 @@ fileprivate class WortiseAppOpenDelegate: WAAppOpenDelegate {
     }
     
     func didFailToLoad(appOpenAd: WAAppOpenAd, error: WAAdError) {
-        let values = [
-            "error": error.name
-        ]
-
-        channel.invokeMethod("failedToLoad", arguments: values)
+        channel.invokeMethod("failedToLoad", arguments: error.toMap())
     }
     
     func didFailToShow(appOpenAd: WAAppOpenAd, error: WAAdError) {
-        let values = [
-            "error": error.name
-        ]
-
-        channel.invokeMethod("failedToShow", arguments: values)
+        channel.invokeMethod("failedToShow", arguments: error.toMap())
     }
 
     func didImpress(appOpenAd: WAAppOpenAd) {
@@ -211,6 +203,10 @@ fileprivate class WortiseAppOpenDelegate: WAAppOpenDelegate {
 
     func didLoad(appOpenAd: WAAppOpenAd) {
         channel.invokeMethod("loaded", arguments: nil)
+    }
+
+    func didPayRevenue(appOpenAd: WAAppOpenAd, data: WARevenueData) {
+        channel.invokeMethod("revenuePaid", arguments: data.toMap())
     }
 
     func didShow(appOpenAd: WAAppOpenAd) {

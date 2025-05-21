@@ -113,11 +113,7 @@ extension WortiseBannerAdView: WABannerDelegate {
     }
     
     public func didFailToLoad(bannerAd: WABannerAd, error: WAAdError) {
-        let values = [
-            "error": error.name
-        ]
-
-        channel.invokeMethod("failedToLoad", arguments: values)
+        channel.invokeMethod("failedToLoad", arguments: error.toMap())
     }
     
     public func didImpress(bannerAd: WABannerAd) {
@@ -131,5 +127,9 @@ extension WortiseBannerAdView: WABannerDelegate {
         ]
 
         channel.invokeMethod("loaded", arguments: values)
+    }
+
+    public func didPayRevenue(bannerAd: WABannerAd, data: WARevenueData) {
+        channel.invokeMethod("revenuePaid", arguments: data.toMap())
     }
 }
