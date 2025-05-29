@@ -1,3 +1,7 @@
+## 1.7.1
+
+* Wortise Android SDK updated to version 1.7.1
+
 ## 1.7.0
 
 * Wortise Android SDK updated to version 1.7.0
