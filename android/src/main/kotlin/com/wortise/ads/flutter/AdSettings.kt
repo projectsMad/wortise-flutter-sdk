@@ -57,7 +57,7 @@ class AdSettings : FlutterPlugin, MethodCallHandler {
     private fun getMaxAdContentRating(call: MethodCall, result: Result) {
         val rating = AdSettings.getMaxAdContentRating(context)
             ?.name
-            ?.toLowerCase()
+            ?.lowercase()
 
         result.success(rating)
     }

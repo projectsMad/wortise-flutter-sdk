@@ -63,7 +63,7 @@ class DataManager : FlutterPlugin, MethodCallHandler {
     private fun getGender(call: MethodCall, result: Result) {
         val gender = DataManager.getGender(context)
             ?.name
-            ?.toLowerCase()
+            ?.lowercase()
 
         result.success(gender)
     }
