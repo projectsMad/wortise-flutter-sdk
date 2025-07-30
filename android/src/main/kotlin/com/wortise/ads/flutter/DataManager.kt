@@ -89,7 +89,7 @@ class DataManager : FlutterPlugin, MethodCallHandler {
     private fun setGender(call: MethodCall, result: Result) {
         val name = call.argument<String>("gender")
 
-        val gender = name?.toUpperCase()?.let { UserGender.valueOf(it) }
+        val gender = name?.uppercase()?.let { UserGender.valueOf(it) }
 
         DataManager.setGender(context, gender)
 
